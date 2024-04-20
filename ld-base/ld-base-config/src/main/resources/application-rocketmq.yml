@@ -1,0 +1,13 @@
+#rocketmq配置信息
+rocketmq:
+  #nameservice服务器地址（多个以英文逗号隔开）
+  name-server: ${ld.host}:${ld.rocketmq-port}
+  #生产者配置
+  producer:
+    group: clip-producer-group
+  #消费者配置
+  consumer:
+    #组名
+    group: clip-consumer-group
+    #监听主题
+    topic: clip-loc

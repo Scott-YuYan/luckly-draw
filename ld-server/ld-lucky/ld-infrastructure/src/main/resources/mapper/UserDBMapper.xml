@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.infrastructure.gateway.impl.mapper.UserDBMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.infrastructure.gateway.impl.dataobject.UserDB">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updater" column="updater" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,password,
+        name,phone,create_time,
+        creator,update_time,updater
+    </sql>
+
+    <select id="findByUserName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ld_user ldu
+        <where>
+            <if test="id != null">
+                and ldu.id = #{id}
+            </if>
+            <if test="username != null and username != '' ">
+                and ldu.username = #{username}
+            </if>
+        </where>
+    </select>
+
+    <select id="listByParamQuery" resultType="com.example.infrastructure.gateway.impl.dataobject.UserDB">
+        select
+        <include refid="Base_Column_List"/>
+        from ld_user a
+        <where>
+            <if test="query.id != null">
+                and a.id = #{query.id}
+            </if>
+            <if test="query.name != null and query.name != ''">
+                and a.name like concat('%', #{query.name},'%')
+            </if>
+            <if test="query.phone != null and query.phone != ''">
+                and a.phone = #{query.phone}
+            </if>
+        </where>
+    </select>
+
+</mapper>

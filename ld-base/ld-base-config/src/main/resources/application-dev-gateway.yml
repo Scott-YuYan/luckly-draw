@@ -1,0 +1,42 @@
+spring:
+  cloud:
+    # cn.baiqi.gateway 网关
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+#            全局默认的filter
+      default-filters:
+        - name: IpRequestRateLimiter
+          args:
+            key-resolver: "#{@ipKeyResolver}"
+            redis-rate-limiter.replenishRate: 10 #字段为令牌桶恢复速度，即每秒访问个数
+            redis-rate-limiter.burstCapacity: 40 #字段为令牌桶大小，即峰值流量来临时最大可访问数
+      routes:
+        - id: ld-start   # 在请求http://127.0.0.1:7210/ld-start/** 请求时，将请求转发给uri对应的服务
+          uri: lb://ld-start
+          predicates:
+            - Path=/ld-start/**
+          filters:
+            # 1表示过滤一个路径
+            - StripPrefix=1
+#            - 针对单个服务的filter
+#            - name: IpRequestRateLimiter #请求数限流 名字不能随便写
+#              args:
+#                key-resolver: "#{@ipKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1 #字段为令牌桶恢复速度，即每秒访问个数
+#                redis-rate-limiter.burstCapacity: 1 #字段为令牌桶大小，即峰值流量来临时最大可访问数
+
+
+
+# 忽略 url 拦截
+ld.global-filter:
+  ignoreUrlSet:
+    - /user/login
+    - /user/register
+    - /ld-druid/
+    - /test
+  authorization: Authorization

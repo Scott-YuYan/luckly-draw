@@ -1,0 +1,49 @@
+ld:
+  host: ENC@2YKSg4iC8J6ROcJDFNNJxnDR8yh9oHdP9CTRuW+8bm1s1QOPaECKng6rFs7TI5fb
+  mysql-port: 3306
+  redis-port: 6379
+  nacos-port: 8849
+  druid_password: ENC@bwGi+6WiBGLUbhZhWQhyffBGdm+6cn5ufDwjpmB+P+qa9gtveYuuxVCJRhEA6BDe
+
+##nacos
+nacos:
+  #dev画
+  namespace: b40a6db5-c4a4-41e2-b2d8-f9fbc4a3851a
+#database
+DB_HOST: ${ld.host}:${ld.mysql-port}
+DB_NAME: ENC@c12DzbkxboroBOetTGfVxAdqlnCgNO2UjNHacH+8AmQ8LIyPF6clr1hTCRr4lZgT
+DB_USERNAME: ENC@YSaTFM0rYF1Q5xmh/T7DNWC7Neo07xQuCI/fwEbte9GKrb7egQk1WLPa59shxihW
+DB_PASSWORD: ENC@xZdDd2gj1pYTmGP93oYPpxLfoFGFVUYXdCPgclI9x22vBD6nKqDEkyxjnD0SZGbY
+
+jasypt:
+  encryptor:
+    # 加密算法
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 加密使用的盐
+    password: jaspyt_password
+    # 使用的加密解密类
+    bean: jasyptStringEncryptor
+    property:
+      # 修改默认的前缀和后缀，如果自定义属性探测器，那么此项配置不起作用
+      # prefix: ENC_(
+      # suffix: )
+      # 自定义的属性探测器，如果这个是自定义的，那么上述的前缀后缀不生效
+      detector-bean: encryptablePropertyDetector
+      # 自定义解密逻辑类 如果配置了，默认的解析器将不工作
+      resolver-bean: encryptablePropertyResolver
+      # 过滤器的bean
+      filter-bean: encryptablePropertyFilter
+      # 过滤器配置，正则
+      filter:
+        # 默认包含的
+        include-names:
+        # 默认拦截的，默认拦截jasypt.encryptor的配置
+        exclude-names:
+          - ^jasypt\.encryptor\.*
+    key-obtention-iterations: 1000
+    pool-size: 1
+    provider-name: SunJCE
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
+    iv-generator-classname: org.jasypt.iv.RandomIvGenerator
+    string-output-type: base64
+

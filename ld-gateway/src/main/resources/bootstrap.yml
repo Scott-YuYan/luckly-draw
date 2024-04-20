@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: ld-gateway
+server:
+  port: 7210

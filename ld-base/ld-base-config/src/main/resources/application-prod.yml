@@ -1,0 +1,14 @@
+bld:
+  host:
+  mysql-port:
+  nacos-port:
+  redis-port:
+  rocketmq-port:
+#nacos
+nacos:
+  namespace:
+#database
+DB_HOST:
+DB_NAME:
+DB_USERNAME:
+DB_PASSWORD:

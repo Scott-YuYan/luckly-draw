@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ld-start
+
+server:
+  port: 7214

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<modules>
+		<module>ld-base-config</module>
+		<module>ld-base-common</module>
+	</modules>
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>lucky-draw-1</artifactId>
+		<version>${bld.version}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>ld-base</artifactId>
+	<version>${bld.version}</version>
+	<name>ld-base</name>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>ld-pom</artifactId>
+			<version>${bld.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
